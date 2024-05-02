@@ -3,19 +3,25 @@ class Solution
 public:
     int findMaxK(vector<int>& nums) 
     {
-        int maxAns = -1;
+        if (nums.size() == 0 || nums.size() == 1 )
+            return -1;
 
-        for(int i = 0; i < nums.size(); i++)
+        sort(nums.begin(), nums.end()); 
+        int l = 0;
+        int r = nums.size() - 1;
+
+        while(l < r)
         {
-            for(int j = 0; j < nums.size(); j++)
-            {
-                if(nums[i] == -1*nums[j])
-                {
-                    maxAns = max(maxAns, nums[i]); 
-                }
-            }
-        }
+            if(nums[l] + nums[r] == 0)
+                return nums[r];
 
-        return maxAns;
+            else if(nums[l] + nums[r] > 0)
+                r--;
+
+            else if(nums[l] + nums[r] < 0)
+                l++;
+        }
+        
+        return -1;        
     }
 };
