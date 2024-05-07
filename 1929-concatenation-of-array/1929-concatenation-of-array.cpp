@@ -2,16 +2,14 @@ class Solution {
 public:
     vector<int> getConcatenation(vector<int>& nums) 
     {
-        vector<int> ans;
+        int n = nums.size();
+        vector<int> ans(n * 2);
 
-        for(int i = 0; i < 2; i ++)
+        for(int i=0; i<n; i++)
         {
-            for(const auto& num : nums)
-            {
-                ans.push_back(num);
-            }
+            ans[i] = ans[i+n] = nums[i];
         }
-
+        
         return ans;
     }
 };
