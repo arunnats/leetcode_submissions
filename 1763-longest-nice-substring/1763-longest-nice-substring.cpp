@@ -5,6 +5,7 @@ public:
         int n = s.size();
         int maxLen = 0;
         int startIndex = 0;
+        
         for(int i = 0; i < n; i++)
         {
             int lowerCase=0;
