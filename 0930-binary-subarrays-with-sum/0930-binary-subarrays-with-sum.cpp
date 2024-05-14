@@ -11,7 +11,12 @@ public:
         for(int i = 0; i < n; i++)
         {
             prefixSum = prefixSum + nums[i];
-            ans = ans + map[prefixSum - goal];
+
+            if(map.find(prefixSum-goal) != map.end())
+            {
+                ans = ans + map[prefixSum - goal];
+            }
+
             map[prefixSum]++;
         }
 
