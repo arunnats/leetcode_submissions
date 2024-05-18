@@ -3,23 +3,27 @@ class Solution
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) 
     {
-        vector<int> ans;
-
-        for(const auto& num: nums1)
+        int n = nums1.size();
+        vector<int> ans(n, -1);
+        unordered_map<int, int> lookup;
+        stack<int> indexStack;
+        
+        for(int i = 0; i < nums2.size(); i++ )
         {
-            int nextMax = -1;
-            int flag = 0;
-            for(int i = 0; i < nums2.size(); i++)
+            while(!indexStack.empty() && nums2[i] > nums2[indexStack.top()])
             {
-                if(nums2[i] == num)
-                    flag = 1;
-                else if(flag == 1 && nums2[i] > num)
-                {
-                    nextMax = nums2[i];
-                    break;
-                }
+                lookup[nums2[indexStack.top()]] = nums2[i];
+                indexStack.pop();
             }
-            ans.push_back(nextMax);
+            indexStack.push(i);
+        }
+
+        for(int i = 0; i < n; i++)
+        {
+            if(lookup.find(nums1[i]) != lookup.end())
+            {
+                ans[i] = lookup[nums1[i]];
+            }
         }
 
         return ans;
