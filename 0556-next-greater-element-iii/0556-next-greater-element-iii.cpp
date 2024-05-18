@@ -2,14 +2,14 @@ class Solution {
 public:
     int nextGreaterElement(int n) 
     {
-        std::vector<int> num;
+        vector<int> num;
         int temp = n;
         while(temp > 0)
         {
             num.push_back(temp % 10);
             temp = temp / 10;
         }    
-        std::reverse(num.begin(), num.end()); 
+        reverse(num.begin(), num.end()); 
 
         int size = num.size();
         int i = size - 2;
@@ -26,9 +26,9 @@ public:
             {
                 j--;
             }
-            std::swap(num[i], num[j]);
+            swap(num[i], num[j]);
         }
-        std::reverse(num.begin() + i + 1, num.end());
+        reverse(num.begin() + i + 1, num.end());
 
         long long ans = 0;
         for (int digit : num)
