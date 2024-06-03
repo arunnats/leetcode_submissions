@@ -18,12 +18,11 @@ public:
         for(int i = n-1; i >= 1; i--)
             temp2.push_back(nums[i]);
         
-        return max(logic(temp1), logic(temp2));
+        return max(logic(temp1, n-1), logic(temp2, n-1));
     }
 
-    int logic(vector<int>& nums)
+    int logic(vector<int>& nums, int n)
     {
-        int n = nums.size();
         if(n == 1)
             return nums[0];
         if(n == 2)
