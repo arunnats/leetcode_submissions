@@ -13,20 +13,23 @@ class Solution {
 public:
     int kthSmallest(TreeNode* root, int k) 
     {
-        vector<int> list;
-
-        recurse (root, list);
-        
-        return list[k-1];
+        int count = 0;
+        int ans = -1;
+        recurse(root, ans, count, k);
+        return ans;
     }   
 
-    void recurse(TreeNode* root, vector<int>& list)
+    void recurse(TreeNode* root, int& ans, int& count, int k)
     {
         if(!root)
             return;
 
-        recurse(root->left, list);
-        list.push_back(root->val);
-        recurse(root->right, list);
+        recurse(root->left, ans, count, k);
+        count++;
+        if(count == k) {
+            ans = root->val;
+            return; 
+        }
+        recurse(root->right, ans, count, k);
     }
 };
