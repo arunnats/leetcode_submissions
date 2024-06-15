@@ -26,30 +26,54 @@ public:
         if(!head)
             return NULL;
 
-        vector<int> nums;
+        // vector<int> nums;
 
-        while(head)
-        {
-            nums.push_back(head->val);
-            head = head -> next;
-        }
-        int n = nums.size();
+        // while(head)
+        // {
+        //     nums.push_back(head->val);
+        //     head = head -> next;
+        // }
+        // int n = nums.size();
 
-        return util(nums, 0, n-1);
+        // return util(nums, 0, n-1);
+
+        if (!head) return nullptr;
+        return util(head, nullptr);
     }
 
-    TreeNode* util(vector<int>& nums, int startIndex, int endIndex) 
+    TreeNode* util(ListNode* head, ListNode* tail)
     {
-        if( startIndex > endIndex )
-            return NULL;
+        if (head == tail) return nullptr;
 
-        int mid = startIndex + (endIndex - startIndex) / 2;
+        ListNode* slow = head;
+        ListNode* fast = head;
 
-        TreeNode* Node = new TreeNode(nums[mid]);
+        while (fast != tail && fast->next != tail) 
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
 
-        Node -> left = util(nums, startIndex, mid-1);
-        Node -> right = util(nums, mid+1, endIndex);
+        TreeNode* Node = new TreeNode(slow->val);
+
+        Node->left = util(head, slow);
+        Node->right = util(slow->next, tail);
 
         return Node;
     }
+
+    // TreeNode* util(vector<int>& nums, int startIndex, int endIndex) 
+    // {
+    //     if( startIndex > endIndex )
+    //         return NULL;
+
+    //     int mid = startIndex + (endIndex - startIndex) / 2;
+
+    //     TreeNode* Node = new TreeNode(nums[mid]);
+
+    //     Node -> left = util(nums, startIndex, mid-1);
+    //     Node -> right = util(nums, mid+1, endIndex);
+
+    //     return Node;
+    // }
 };
