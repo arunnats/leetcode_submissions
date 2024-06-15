@@ -16,9 +16,7 @@ public:
         vector<int> list;
 
         recurse (root, list);
-
-        sort(list.begin(), list.end());
-
+        
         return list[k-1];
     }   
 
@@ -27,8 +25,8 @@ public:
         if(!root)
             return;
 
-        list.push_back(root->val);
         recurse(root->left, list);
+        list.push_back(root->val);
         recurse(root->right, list);
     }
 };
