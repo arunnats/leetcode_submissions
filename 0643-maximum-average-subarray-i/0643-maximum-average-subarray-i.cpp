@@ -10,18 +10,15 @@ public:
             ave += nums[i];
         }
 
-        ave /= k;
         ans = ave;
 
         for(int i = k; i < n; i++)
         {
-            ave *= k;
             ave += nums[i];
             ave -= nums[i-k];
-            ave /= k;
             ans = max(ans, ave);
         }
 
-        return ans;
+        return ans/k;
     }
 };
